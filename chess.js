@@ -3,6 +3,7 @@ const dfen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 /* this defines selected piece*/
 let clicked = false;
+let checked = false;
 let selectedp = [];
 
 /* this separates the fen*/
@@ -14,8 +15,6 @@ let dot = []
 let str = []
 let des = []
 let rep ;
-
-console.log(turn)
 
 /* this is the board in matrix form*/
 let matrix = [
@@ -140,7 +139,7 @@ function handleClick(event) {
              if (row === dot[de][0] && col === dot[de][1]){
              
                  des.push([row,col])
-     
+                 
                  move(row,col)
      
                  console.log('destination')
@@ -174,7 +173,7 @@ function handleClick(event) {
           }
       
       }else if (turn === 'b'){
-      
+          
           let bpiece = piece_atp(index)
           if (isUpperCase(bpiece)) {
           
@@ -220,7 +219,7 @@ function wpawn_movement(index){
         
         if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
             
-            console.log('above')
+            break;
             
         }else{
             
@@ -260,7 +259,7 @@ function bpawn_movement(index){
         
         if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
             
-            console.log('above')
+            break;
             
         }else{
             
@@ -268,8 +267,11 @@ function bpawn_movement(index){
             
                 if(is_there(frow,fcol)) {
                 
-                    result.push([frow,fcol])
-                    console.log("there is a piece")
+                    if (is_enemy(frow,fcol)) {
+                
+                        result.push([frow, fcol])
+                    
+                    }
                 }
             
             }else if (bpawn[j][0] === 2){
@@ -304,12 +306,19 @@ function queen_movement(index) {
             let fcol = col + fq[r][1]
             if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
                 
-                console.log('above index')
+                break;
                 
             }else if (is_there(frow,fcol)) {
                 
-                result.push([frow, fcol])
-                break;
+                if (!is_enemy(frow,fcol)) {
+                
+                    result.push([frow, fcol])
+                    break;
+                }else {
+                    
+                    break;
+                }
+                
             }else {
                 
                 result.push([frow ,fcol])
@@ -335,12 +344,19 @@ function rook_movement(index) {
             let fcol = col + fq[r][1]
             if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
                 
-                console.log('above index')
+                break;
                 
             }else if (is_there(frow,fcol)) {
                 
-                result.push([frow, fcol])
-                break;
+                if (!is_enemy(frow,fcol)) {
+                
+                    result.push([frow, fcol])
+                    break;
+                }else {
+                    
+                    break;
+                }
+                
             }else {
                 
                 result.push([frow ,fcol])
@@ -366,12 +382,19 @@ function bishop_movement(index) {
             let fcol = col + fq[r][1]
             if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
                 
-                console.log('above index')
+                break;
                 
             }else if (is_there(frow,fcol)) {
                 
-                result.push([frow, fcol])
-                break;
+                if (!is_enemy(frow,fcol)) {
+                
+                    result.push([frow, fcol])
+                    break;
+                }else {
+                    
+                    break;
+                }
+                
             }else {
                 
                 result.push([frow ,fcol])
@@ -399,7 +422,12 @@ function knight_movement(index) {
             
         }else if(is_there(frow,fcol)){
             
-            result.push([frow, fcol])
+            if (!is_enemy(frow,fcol)) {
+                
+                result.push([frow, fcol])
+                
+            }
+            
             
         }else{
             
@@ -423,11 +451,11 @@ function king_movement(index) {
         
         if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
             
-            console.log('above')
+            continue;
             
         }else if(is_there(frow,fcol)){
             
-            if (is_mpiece(frow,fcol)) {
+            if (!is_enemy(frow,fcol)) {
                 
                 result.push([frow, fcol])
                 
@@ -455,29 +483,50 @@ function move(row,col) {
     const destination = document.querySelector(`.sqr[data-position="${row}-${col}"]`);
     
     let piece = piece_atrc(strr,strc)
+    let dpiece = piece_atrc(row,col)
     
     if(turn === 'w'){
         
         if(isLowerCase(piece_atrc(row,col))){
             
             matrix[strr][strc] = '';
-            starting.textContent = getPieceSymbol('');
             matrix[row][col] = piece;
-            destination.textContent = getPieceSymbol(piece);
-    
-            turn = (turn === 'w') ? 'b' : 'w';
-    
+                
+            if(is_incheck()){
+                    
+                matrix[strr][strc] = piece;
+                matrix[row][col] = dpiece;
+                       
+            }else{
+                    
+                starting.textContent = getPieceSymbol('');
+                destination.textContent = getPieceSymbol(piece);
+                
+                turn = (turn === 'w') ? 'b' : 'w';
+                        
+            }
+            
             reset()
             
         }else if(destination.textContent === '•'){
             
-            matrix[strr][strc] = '';
-            starting.textContent = getPieceSymbol('');
+             matrix[strr][strc] = '';
             matrix[row][col] = piece;
-            destination.textContent = getPieceSymbol(piece);
-    
-            turn = (turn === 'w') ? 'b' : 'w';
-    
+                
+            if(is_incheck()){
+                    
+                matrix[strr][strc] = piece;
+                matrix[row][col] = dpiece;
+                       
+            }else{
+                    
+                starting.textContent = getPieceSymbol('');
+                destination.textContent = getPieceSymbol(piece);
+                
+                turn = (turn === 'w') ? 'b' : 'w';
+                        
+            }
+            
             reset()
             
         }//else{
@@ -491,24 +540,44 @@ function move(row,col) {
         
         if(isUpperCase(piece_atrc(row,col))){
             
-            matrix[strr][strc] = '';
-            starting.textContent = getPieceSymbol('');
+             matrix[strr][strc] = '';
             matrix[row][col] = piece;
-            destination.textContent = getPieceSymbol(piece);
-    
-            turn = (turn === 'w') ? 'b' : 'w';
-    
+                
+            if(is_incheck()){
+                    
+                matrix[strr][strc] = piece;
+                matrix[row][col] = dpiece;
+                       
+            }else{
+                    
+                starting.textContent = getPieceSymbol('');
+                destination.textContent = getPieceSymbol(piece);
+                
+                turn = (turn === 'w') ? 'b' : 'w';
+                        
+            }
+            
             reset()
             
         }else if(destination.textContent === '•'){
             
-            matrix[strr][strc] = '';
-            starting.textContent = getPieceSymbol('');
+             matrix[strr][strc] = '';
             matrix[row][col] = piece;
-            destination.textContent = getPieceSymbol(piece);
-    
-            turn = (turn === 'w') ? 'b' : 'w';
-    
+                
+            if(is_incheck()){
+                    
+                matrix[strr][strc] = piece;
+                matrix[row][col] = dpiece;
+                       
+            }else{
+                    
+                starting.textContent = getPieceSymbol('');
+                destination.textContent = getPieceSymbol(piece);
+                
+                turn = (turn === 'w') ? 'b' : 'w';
+                        
+            }
+            
             reset()
             
         }
@@ -647,7 +716,7 @@ function is_mpiecep(pos) {
     
 }
 
-function is_mpiece(row , col) {
+function is_enemy(row , col) {
     
     //let [row,col] = fconv(pos)
     
@@ -655,11 +724,15 @@ function is_mpiece(row , col) {
         
         if(isUpperCase(piece_atrc(row,col))){
             
+            return true
+            
+        }else if(matrix[row][col] === ''){
+            
             return false
             
         }else {
             
-            return true
+            return false
             
         }
         
@@ -667,11 +740,15 @@ function is_mpiece(row , col) {
         
         if(isLowerCase(piece_atrc(row,col))){
             
+            return true
+            
+        }else if(matrix[row][col] === ''){
+            
             return false
             
         }else{
             
-            return true
+            return false
             
         }
         
@@ -718,8 +795,39 @@ function piece_atrc(r,c) {
 function is_incheck() {
     
     let result = []
-    let [row,col] = fconv(index)
-    for(let q = 0; q < 8; q++){
+    let row = 7
+    let col = 4
+    let whichking = 'k'
+    let check = false
+    
+    if (turn === 'w') {
+        
+        whichking = 'K'
+        
+    }else if(turn === 'b'){
+        
+        whichking = 'k'
+        
+    }
+    
+    outerloop:
+    for(let r = 0;r < matrix.length; r++){
+        
+        for(let c = 0; c < matrix[r].length; c++){
+            
+            if (matrix[r][c] === whichking) {
+                
+                row = r
+                col = c
+                break outerloop;
+                
+            }
+            
+        }
+        
+    }
+    
+    for(let q = 0; q < 4; q++){
         
         let fq = queen[q]
         for(let r = 0 ; r < 7; r++){
@@ -728,11 +836,46 @@ function is_incheck() {
             let fcol = col + fq[r][1]
             if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
                 
-                console.log('above index')
+               break;
                 
-            }else {
+            }else if(is_enemy(frow,fcol)) {
                 
-                result.push([frow ,fcol])
+                break;
+                
+            }else if (piece_atrc(frow,fcol).toLowerCase() === 'R' || piece_atrc(frow,fcol).toLowerCase() === 'Q') {
+                
+                console.log('in check')
+                check = true
+                result.push([frow, fcol])
+                break;
+                
+            }
+            
+        }
+        
+    }
+    
+    for(let q = 4; q < 8; q++){
+        
+        let fq = queen[q]
+        for(let r = 0 ; r < 7; r++){
+            
+            let frow = row + fq[r][0]
+            let fcol = col + fq[r][1]
+            if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
+                
+                break;                
+            }else if(is_enemy(frow,fcol)) {
+                
+                break;
+                
+            }else if (piece_atrc(frow,fcol).toLowerCase() === 'b' || piece_atrc(frow,fcol).toLowerCase() === 'q') {
+                
+                console.log('in check')
+                check = true
+                result.push([frow, fcol])
+                break;
+                
             }
             
         }
@@ -746,17 +889,22 @@ function is_incheck() {
         
         if (frow < 0 || frow > 7 || fcol < 0 || fcol > 7){
             
-            console.log('above')
+            continue;
             
-        }else{
+        }else if(is_enemy(frow,fcol)){
             
+            continue;
+            
+        }else if(piece_atrc(frow,fcol).toLowerCase() === 'n'){
+            
+            console.log('in check')
+            check = true
             result.push([frow, fcol])
             
         }
         
     }
     
-    return result
+    return check
     
 }
-
