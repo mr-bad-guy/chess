@@ -1,12 +1,105 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Page title</title>
     <link rel="stylesheet" href="chess.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chess board</title>
 </head>
-<body>
-    <div id="board"></div>
-</body>
+<body draggable="false">
+    <div class="container">
+        <div class="squeres" id="a8"><p class="left_numbres">8</p><img src="/img/pieces.png" class="black_rock_left" id="black_rock_left_a8"></div>
+        <div class="squeres_black" id="b8"><img src="/img/pieces.png" class="black_night_left" id="black_night_left_b8"></div>
+        <div class="squeres" id="c8"><img src="/img/pieces.png" class="black_bishop_left" id="black_bishop_left_c8"></div>
+        <div class="squeres_black" id="d8"><img src="/img/pieces.png" class="black_queen_left" id="black_queen_left_d8"></div>
+        <div class="squeres" id="e8"><img src="/img/pieces.png" class="black_king" id="black_king_e8"></div>
+        <div class="squeres_black" id="f8"><img src="/img/pieces.png" class="black_bishop_right" id="black_bishop_right_f8"></div>
+        <div class="squeres" id="g8"><img src="/img/pieces.png" class="black_night_right" id="black_night_right_g8"></div>
+        <div class="squeres_black" id="h8"><img src="/img/pieces.png" class="black_rock_right" id="black_rock_right_h8"></div>
+
+        <div class="squeres_black" id="a7"><p class="left_numbres">7</p><img src="/img/pieces.png" class="black_pown" id="pwn_a7"></div>
+        <div class="squeres" id="b7"><img src="/img/pieces.png" class="black_pown" id="pwn_b7"></div>
+        <div class="squeres_black" id="c7"><img src="/img/pieces.png" class="black_pown" id="pwn_c7"></div>
+        <div class="squeres" id="d7"><img src="/img/pieces.png" class="black_pown" id="pwn_d7"></div>
+        <div class="squeres_black" id="e7"><img src="/img/pieces.png" class="black_pown" id="pwn_e7"></div>
+        <div class="squeres" id="f7"><img src="/img/pieces.png" class="black_pown" id="pwn_f7"></div>
+        <div class="squeres_black" id="g7"><img src="/img/pieces.png" class="black_pown" id="pwn_g7"></div>
+        <div class="squeres" id="h7"><img src="/img/pieces.png" class="black_pown" id="pwn_h7"></div>
+
+        <div class="squeres" id="a6"><p class="left_numbres">6</p></div>
+        <div class="squeres_black" id="b6"></div>
+        <div class="squeres" id="c6"></div>
+        <div class="squeres_black" id="d6"></div>
+        <div class="squeres" id="e6"></div>
+        <div class="squeres_black" id="f6"></div>
+        <div class="squeres" id="g6"></div>
+        <div class="squeres_black" id="h6"></div>
+
+        <div class="squeres_black" id="a5"><p class="left_numbres">5</p></div>
+        <div class="squeres" id="b5"></div>
+        <div class="squeres_black" id="c5"></div>
+        <div class="squeres" id="d5"></div>
+        <div class="squeres_black" id="e5"></div>
+        <div class="squeres" id="f5"></div>
+        <div class="squeres_black" id="g5"></div>
+        <div class="squeres" id="h5"></div>
+
+        <div class="squeres" id="a4"><p class="left_numbres">4</p></div>
+        <div class="squeres_black" id="b4"></div>
+        <div class="squeres" id="c4"></div>
+        <div class="squeres_black" id="d4"></div>
+        <div class="squeres" id="e4"></div>
+        <div class="squeres_black" id="f4"></div>
+        <div class="squeres" id="g4"></div>
+        <div class="squeres_black" id="h4"></div>
+
+        <div class="squeres_black" id="a3"><p class="left_numbres">3</p></div>
+        <div class="squeres" id="b3"></div>
+        <div class="squeres_black" id="c3"></div>
+        <div class="squeres" id="d3"></div>
+        <div class="squeres_black" id="e3"></div>
+        <div class="squeres" id="f3"></div>
+        <div class="squeres_black" id="g3"></div>
+        <div class="squeres" id="h3"></div>
+
+        <div class="squeres" id="a2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_a2"><p class="left_numbres">2</p></div>
+        <div class="squeres_black" id="b2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_b2"></div>
+        <div class="squeres" id="c2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_c2"></div>
+        <div class="squeres_black" id="d2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_d2"></div>
+        <div class="squeres" id="e2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_e2"></div>
+        <div class="squeres_black" id="f2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_f2"></div>
+        <div class="squeres" id="g2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_g2"></div>
+        <div class="squeres_black" id="h2"><img src="/img/pieces.png" class="pieces_for_powen" id="pwn_h2"></div>
+
+        <div class="squeres_black" id="a1"><p class="left_numbres">1</p><img src="/img/pieces.png" class="rock_left" id="rock_left_a8">
+            <P class="aonly">A</P>
+        </div>
+        <div class="squeres" id="b1"><P class="right_numbres">B</P><img src="/img/pieces.png" class="night_left" id="night_left_b8"></div>
+        <div class="squeres_black" id="c1"><P class="right_numbres">C</P><img src="/img/pieces.png" class="bishop_left" id="bishop_left_c8"></div>
+        <div class="squeres" id="d1"><P class="right_numbres">D</P><img src="/img/pieces.png" class="queen_left" id="queen_left_d8"></div>
+        <div class="squeres_black" id="e1"><P class="right_numbres">E</P><img src="/img/pieces.png" class="king" id="king_e8"></div>
+        <div class="squeres" id="f1"><P class="right_numbres">F</P><img src="/img/pieces.png" class="bishop_right" id="bishop_right_f8"></div>
+        <div class="squeres_black" id="g1"><P class="right_numbres">G</P><img src="/img/pieces.png" class="night_right" id="night_right_g8"></div>
+        <div class="squeres" id="h1"><P class="right_numbres">H</P><img src="/img/pieces.png" class="rock_right" id="rock_right_h8"></div>
+    </div> 
+
+    <p class="btn" id="informal"> White Turn</p>
+<br>
+
+
+        <button class="btn" id="start-game-btn">Start Game</button>
+        <button class="btn" id="draw-btn">Draw</button>
+    
+<script>
+    /*add by chat gpt*/
+            document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('img, button, a, input, textarea, select').forEach(function(el) {
+                el.setAttribute('draggable', 'false');
+            });
+            document.addEventListener('dragstart', function(event) {
+                event.preventDefault();
+            });
+        });
+</script>
 <script src="chess.js"></script>
+</body>
 </html>

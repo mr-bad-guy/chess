@@ -1,24 +1,253 @@
-#board{
-    margin-top: 50px;
-    padding: 10px;
+body {
+    background-color: rgb(36, 46, 46);
     display: grid;
-    grid-template-columns: repeat(8, 60px);
-    grid-template-rows: repeat(8, 60px);
-    background-color: black;
-
-    width: fit-content;
+    align-items: center;
+    justify-content: center;
+}
+/*chat gpt*/
+img,
+button,
+input,
+textarea,
+select,
+a,
+.btn {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+}
+.container {
+    width: 800px;
+    height: 800px;
+    position: relative;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(8, 100px);
+    grid-template-rows: repeat(8, 100px);
 }
 
-.sqr{
-    width: 60px;
-    height: 60px;
+.squeres, .squeres_black {
+    position: relative; 
+    width: 100px;
+    height: 100px;
+    font-size: 25px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
 
+.squeres {
+    background-color: white;
+    color: rgb(0, 0, 0);
+}
+
+.squeres_black:hover {
+    background-color: rgb(228, 119, 119);
+    cursor: pointer;
+}
+.squeres:hover {
+    background-color: rgb(203, 196, 196);
+    cursor: pointer;
+}
+.squeres:active{
+    background-color: whitesmoke;
+}
+.squeres_black:active{
+    background-color: rgb(79, 66, 66);
+}
+.squeres_black {
+    background-color: rgb(166, 94, 70);
+    color: white;
+}
+
+.left_numbres {
+    position: absolute;
+    top: 2px;
+    left: 5px;
     margin: 0;
-    padding: 0;
+    z-index: 10
+}
+.right_numbres {
+    position: absolute;
+    bottom: 2px; 
+    right: 5px;
+    margin: 0;
+    z-index: 10;
+}
+.aonly {
+    position: absolute;
+    bottom: 2px;
+    right: 5px;
+    margin: 0;
+    z-index: 10;
+}
 
+.pieces_for_powen {
+    position: relative;
+    top: 10px;
+    left: -392px;
+    z-index: 1;
+}
+.rock_left {
+    position: relative;
+    top: 10px;
+    left: -312;
+    z-index: 1;
+}
+.night_left {
+    position: relative;
+    top: 10px;
+    left: -232px;
+    z-index: 1;
+}
+.bishop_left {
+    position: relative;
+    top: 10px;
+    left: -152px;
+    z-index: 1;
+}
+.queen_left {
+    position: relative;
+    top: 10px;
+    left: -72px;
+    z-index: 1;
+}
+.king {
+    position: relative;
+    top: 10px;
+    left: 8px;
+    z-index: 1;
+}
+.bishop_right {
+    position: relative;
+    top: 10px;
+    left: -152px;
+    z-index: 1;
+}
+.night_right {
+    position: relative;
+    top: 10px;
+    left: -232px;
+    z-index: 1;
+}
+.rock_right {
+    position: relative;
+    top: 10px;
+    left: -312px;
+    z-index: 1;
+}
+.black_pown {
+    position: relative;
+    top: -65px;
+    left: -392px;
+    z-index: 1;
+}
+.black_rock_left {
+    position: relative;
+    top: -67px;
+    left: -312px;
+    z-index: 1;
+}
+.black_night_left {
+    position: relative;
+    top: -67px;
+    left: -232px;
+    z-index: 1;
+}
+.black_bishop_left {
+    position: relative;
+    top: -67px;
+    left: -152px;
+    z-index: 1;
+}
+.black_queen_left {
+    position: relative;
+    top: -67px;
+    left: -72px;
+    z-index: 1;
+}
+.black_king{
+    position: relative;
+    top: -67px;
+    left: 11px;
+    z-index: 1;
+}
+.black_bishop_right {
+    position: relative;
+    top: -67px;
+    left: -152px;
+    z-index: 1;
+}
+.black_night_right {
+    position: relative;
+    top: -67px;
+    left: -232px;
+    z-index: 1;
+}
+.black_rock_right {
+    position: relative;
+    top: -67px;
+    left: -312px;
+    z-index: 1;
+}
+.btn{
+    width: 200px;
     text-align: center;
-    line-height: 60px;
-
-    font-size: 40px;
-    box-sizing: border-box;
+    position: relative;
+    left: 40%;
+    top: -164%;
+    color: black;
+}
+.btn {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  background: linear-gradient(45deg, #cf1050, #ffe601, #1056ec);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: background 0.5s;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff357a, #fff172, #2563eb);
+  background-size: 200% 200%;
+  z-index: -1;
+  border-radius: 50px;
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn:hover {
+  background-position: 100% 50%;
+}
+.btn:hover::before {
+  opacity: 1;
+  background-position: 100% 50%;
+}
+#informal{
+    position: relative;
+    left: 0px;
+    top: -15px;
+}
+#draw-btn{
+    position: relative;
+    left: 600px;
+    top: -265%;
+}
+p{
+    user-select: none;
+    draggable: false;
 }
